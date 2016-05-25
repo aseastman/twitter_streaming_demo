@@ -1,6 +1,4 @@
-name := "twitter_demo"
 
-version := "1.0"
 
 resolvers ++= Seq("mvnrepository" at "http://mvnrepository.com/artifact/",
   "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/",
@@ -15,3 +13,9 @@ libraryDependencies ++= Seq(
   "org.apache.spark" % "spark-streaming-twitter_2.10" % spark_version,
   "org.apache.spark" % "spark-streaming_2.10" % spark_version
 )
+
+lazy val root = (project in file(".")).
+  settings(
+    name := "Spark-H",
+    version := "0.1"
+  )
