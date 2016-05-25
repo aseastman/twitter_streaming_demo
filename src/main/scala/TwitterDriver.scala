@@ -2,6 +2,7 @@ import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.twitter.TwitterUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
+import twitter4j.Status
 
 
 object TwitterDriver {
@@ -15,7 +16,8 @@ object TwitterDriver {
 
     val filters = Seq("#Android")
 
-    val tweets : DStream = TwitterUtils.createStream(ssc,None,filters = filters)
+    val tweets : DStream[Status] = TwitterUtils.createStream(ssc,None,filters = filters)
+
 
     tweets.foreachRDD(tweetRDD => println(tweetRDD.take(1)))
 
