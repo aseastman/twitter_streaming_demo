@@ -18,7 +18,7 @@ object TwitterDriver {
     val sc = new SparkContext(conf)
     val ssc = new StreamingContext(sc,Seconds(10))
 
-    val config : Iterator[String] = Source.fromFile("twitter4j.properties").getLines()
+    val config : Iterator[String] = Source.fromFile("/home/a78084/twitter_demo/twitter_streaming_demo/src/main/scala/twitter4j.properties").getLines()
     val consumerKey       = config.find(_.startsWith("oauth.consumerKey")).get.split("=")(1)
     val consumerSecret    = config.find(_.startsWith("oauth.consumerSecret")).get.split("=")(1)
     val accessToken       = config.find(_.startsWith("oauth.accessToken")).get.split("=")(1)
