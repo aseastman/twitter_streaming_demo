@@ -8,6 +8,7 @@ import edu.stanford.nlp.sentiment.SentimentCoreAnnotations
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 
+
 object SentimentAnalysis {
 
   val nlpProps = {
@@ -21,8 +22,8 @@ object SentimentAnalysis {
     val pipeline = new StanfordCoreNLP(nlpProps)
 
     val annotation = pipeline.process(text)
-    var sentiments: ListBuffer[Double] = ListBuffer()
-    var sizes: ListBuffer[Int] = ListBuffer()
+    var sentiments : ListBuffer[Double] = ListBuffer()
+//    var sizes      : ListBuffer[Int] = ListBuffer()
 
     for (sentence <- annotation.get(classOf[CoreAnnotations.SentencesAnnotation])) {
       val tree = sentence.get(classOf[SentimentCoreAnnotations.AnnotatedTree])
@@ -30,15 +31,16 @@ object SentimentAnalysis {
       val partText = sentence.toString
 
       sentiments += sentiment.toDouble
-      sizes += partText.length
+//      sizes += partText.length
     }
 
-    val weightedSentiments = (sentiments, sizes).zipped.map((sentiment, size) => sentiment * size)
+//    val weightedSentiments = (sentiments, sizes).zipped.map((sentiment, size) => sentiment * size)
 
     val weightedSentiment = if(sentiments.isEmpty) {
       0.0
     } else {
-      weightedSentiments.sum / sizes.sum
+//      weightedSentiments.sum/sizes.sum
+      sentiments.sum/sentiments.length.toDouble
     }
 
     weightedSentiment
