@@ -31,7 +31,8 @@ object TwitterDriver {
 
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
-    val filters : Array[String] = Array("arrow.com","@ArrowGlobal","#fiveyearsout","#arrowdriven")
+//    val filters : Array[String] = Array("arrow.com","@ArrowGlobal","#fiveyearsout","#arrowdriven")
+    val filters : Array[String] = Array("-74,40,-73,41")
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth))
 
@@ -40,7 +41,7 @@ object TwitterDriver {
       tweetRDD.foreach{tweet =>
         val lat = try {tweet.getGeoLocation.getLatitude} catch {case a: NullPointerException => 0.0}
         val lon = try {tweet.getGeoLocation.getLongitude} catch {case a: NullPointerException => 0.0}
-        if (lat <= -73.0 && lat >= -74.0 && lon <= 41.0 && lon >= 40.0) {
+        if (lon <= -73.0 && lon >= -74.0 && lat <= 41.0 && lat >= 40.0) {
           val username: String = tweet.getUser.getScreenName
           val friends: Long = tweet.getUser.getFriendsCount
           val text: String = tweet.getText
