@@ -2,11 +2,10 @@ import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.twitter._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
-import twitter4j.auth.{AuthorizationFactory, OAuthAuthorization}
+import twitter4j.auth.{Authorization, AuthorizationFactory}
 import twitter4j.conf.ConfigurationBuilder
 
-import scala.io.Source
-//import twitter4j.Status
+import twitter4j.Status
 
 
 object TwitterDriver {
@@ -15,7 +14,7 @@ object TwitterDriver {
     val conf = new SparkConf()
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 
-    val sc = new SparkContext(conf)
+    val sc  = new SparkContext(conf)
     val ssc = new StreamingContext(sc,Seconds(10))
 
     val consumerKey       = config.consumerKey
@@ -30,17 +29,22 @@ object TwitterDriver {
       .setOAuthAccessToken(accessToken)
       .setOAuthAccessTokenSecret(accessTokenSecret)
 
-    val auth = AuthorizationFactory.getInstance(cb.build())
+    val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
-    val filters = Seq("#Android")
+    val filters : Array[String] = Array("arrow.com","@ArrowGlobal","#fiveyearsout","#arrowdriven")
 
-    val tweets = TwitterUtils.createStream(ssc, Option(auth),filters)
-
-
-    tweets.foreachRDD(tweetRDD => tweetRDD.foreach(println))
+    val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
 
-
+    tweets.foreachRDD{tweetRDD =>
+      tweetRDD.foreach{tweet =>
+        val username : String = tweet.getUser.getScreenName
+        val friends  : Long   = tweet.getUser.getFriendsCount
+        val text     : String = tweet.getText
+        val textCount : Long = text.split(" ").length
+        println(s"$username has tweeted '$text' ($textCount words) and has $friends friends.")
+      }
+    }
     ssc.start()
     ssc.awaitTermination()
   }
