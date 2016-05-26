@@ -45,7 +45,7 @@ object TwitterDriver {
         if (lang == "en") {
           val username: String = tweet.getUser.getScreenName
           val friends: Long = tweet.getUser.getFriendsCount
-          val text: String = tweet.getText
+          val text: String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z ]","")
           val textCount: Long = text.split(" ").length
           val sentimentValue = SentimentAnalysis.detectSentiment(text)
           val sentiment = if (sentimentValue <= 0.0) {
@@ -61,7 +61,9 @@ object TwitterDriver {
           } else if (sentimentValue <= 5.0) {
             "Very Positive"
           } else "Not Understood"
-          println(s"$username is $sentiment has tweeted '$text' ($textCount words) and has $friends friends.")
+          if (sentiment != "Not Understood") {
+            println(s"$username is $sentiment has tweeted '$text' ($textCount words) and has $friends friends.")
+          }
         }
       }
     }
