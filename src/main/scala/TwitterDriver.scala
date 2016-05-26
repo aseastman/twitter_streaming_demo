@@ -31,7 +31,7 @@ object TwitterDriver {
 
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
-    val filters : Array[String] = Array("arrow.com","@ArrowGlobal","#fiveyearsout","#arrowdriven")
+    val filters : Array[String] = Array("arrow.com","@ArrowGlobal","#fiveyearsout","#arrowdriven","#Denver")
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
