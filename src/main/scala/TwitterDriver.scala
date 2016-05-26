@@ -38,8 +38,8 @@ object TwitterDriver {
 
     tweets.foreachRDD{tweetRDD =>
       tweetRDD.foreach{tweet =>
-        val lat = tweet.getGeoLocation.getLatitude
-        val lon = tweet.getGeoLocation.getLongitude
+        val lat = Option(tweet.getGeoLocation.getLatitude).getOrElse(0.0)
+        val lon = Option(tweet.getGeoLocation.getLongitude).getOrElse(0.0)
         if (lat <= -73.0 && lat >= -74.0 && lon <= 41.0 && lon >= 40.0) {
           val username: String = tweet.getUser.getScreenName
           val friends: Long = tweet.getUser.getFriendsCount
