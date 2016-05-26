@@ -11,7 +11,9 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql" % spark_version,
   "org.apache.spark" %% "spark-hive" % spark_version,
   "org.apache.spark" % "spark-streaming-twitter_2.10" % spark_version,
-  "org.apache.spark" % "spark-streaming_2.10" % spark_version
+  "org.apache.spark" % "spark-streaming_2.10" % spark_version,
+  "edu.stanford.nlp" % "stanford-corenlp" % "3.5.1",
+  "edu.stanford.nlp" % "stanford-corenlp" % "3.5.1" classifier "models"
 )
 
 lazy val root = (project in file(".")).
