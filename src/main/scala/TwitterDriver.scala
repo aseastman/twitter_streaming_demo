@@ -31,7 +31,7 @@ object TwitterDriver {
 
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
-    val filters : Array[String] = Array("arrow.com","@ArrowGlobal","#fiveyearsout","#arrowdriven","#NY","#Denver")
+    val filters : Array[String] = Array("location=39,104,41,106","language=en")
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
@@ -45,7 +45,7 @@ object TwitterDriver {
         if (lang == "en") {
           val username : String = tweet.getUser.getScreenName
           val friends : Long = tweet.getUser.getFriendsCount
-          val text : String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z0-9% /n]","").replaceAll("/n"," ")
+          val text : String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z0-9'% /n]","").replaceAll("/n"," ")
           val textCount : Long = text.split(" ").length
           val sentimentValue : Double = SentimentAnalysis.detectSentiment(text)
           val sentiment : String = if (sentimentValue <= 0.0) {
@@ -62,6 +62,7 @@ object TwitterDriver {
             "Very Positive"
           } else "Not Understood"
           if (sentiment != "Not Understood") {
+            println(tweet)
             println(s"$username is $sentiment has tweeted '$text' ($textCount words) and has $friends friends.")
           }
         }
