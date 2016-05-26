@@ -43,12 +43,12 @@ object TwitterDriver {
 //        if (lon <= -73.0 && lon >= -74.0 && lat <= 41.0 && lat >= 40.0) {
           val lang = tweet.getUser.getLang
         if (lang == "en") {
-          val username: String = tweet.getUser.getScreenName
-          val friends: Long = tweet.getUser.getFriendsCount
-          val text: String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z0-9% /n]","").replaceAll("/n"," ")
-          val textCount: Long = text.split(" ").length
-          val sentimentValue = SentimentAnalysis.detectSentiment(text)
-          val sentiment = if (sentimentValue <= 0.0) {
+          val username : String = tweet.getUser.getScreenName
+          val friends : Long = tweet.getUser.getFriendsCount
+          val text : String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z0-9% /n]","").replaceAll("/n"," ")
+          val textCount : Long = text.split(" ").length
+          val sentimentValue : Double = SentimentAnalysis.detectSentiment(text)
+          val sentiment : String = if (sentimentValue <= 0.0) {
             "Not Understood"
           } else if (sentimentValue <= 1.0) {
             "Very Negative"
