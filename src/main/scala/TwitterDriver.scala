@@ -15,7 +15,7 @@ object TwitterDriver {
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 
     val sc  = new SparkContext(conf)
-    val ssc = new StreamingContext(sc,Seconds(10))
+    val ssc = new StreamingContext(sc,Seconds(2))
 
     val consumerKey       = config.consumerKey
     val consumerSecret    = config.consumerSecret
@@ -31,16 +31,13 @@ object TwitterDriver {
 
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
-    val filters : Array[String] = Array("location=39,104,41,106")
+    val filters : Array[String] = Array("#fiveyearsout","#LetsGoPens")
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
 
     tweets.foreachRDD{tweetRDD =>
       tweetRDD.foreach{tweet =>
-//        val lat = try {tweet.getGeoLocation.getLatitude} catch {case a: NullPointerException => 0.0}
-//        val lon = try {tweet.getGeoLocation.getLongitude} catch {case a: NullPointerException => 0.0}
-//        if (lon <= -73.0 && lon >= -74.0 && lat <= 41.0 && lat >= 40.0) {
           val lang = tweet.getUser.getLang
         if (lang == "en") {
           val username : String = tweet.getUser.getScreenName
@@ -62,7 +59,6 @@ object TwitterDriver {
             "Very Positive"
           } else "Not Understood"
           if (sentiment != "Not Understood") {
-            println(tweet)
             println(s"$username is $sentiment has tweeted '$text' ($textCount words) and has $friends friends.")
           }
         }
