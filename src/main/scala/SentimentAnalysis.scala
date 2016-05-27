@@ -13,7 +13,7 @@ object SentimentAnalysis {
 
   val nlpProps = {
     val props = new Properties()
-    props.setProperty("annotators", "tokenize, ssplit, regexner, pos, lemma, deparse, sentiment")
+    props.setProperty("annotators", "tokenize, ssplit, regexner, pos, lemma, depparse, sentiment")
     props
   }
 
