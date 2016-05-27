@@ -42,7 +42,7 @@ object TwitterDriver {
         if (lang == "en") {
           val username : String = tweet.getUser.getScreenName
           val friends : Long = tweet.getUser.getFriendsCount
-          val text : String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z0-9.!?'% /n]","").replaceAll("/n"," ")
+          val text : String = tweet.getText.split("https")(0).replaceAll("[^a-zA-Z0-9.!?'%@ /n]","").replaceAll("/n"," ")
           val textCount : Long = text.split(" ").length
           val sentimentValue : Double = SentimentAnalysis.detectSentiment(text)
           val sentiment : String = if (sentimentValue <= 0.0) {
