@@ -64,7 +64,7 @@ object TwitterDriver {
           }
         }
       }
-      owu.getWeather("Denver")
+      println(owu.getWeather("Denver"))
     }
     ssc.start()
     ssc.awaitTermination()
