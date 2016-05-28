@@ -8,7 +8,7 @@ import twitter4j.conf.ConfigurationBuilder
 import twitter4j.Status
 
 
-object TwitterDriver {
+object TwitterDriver extends config {
 
   def main(args: Array[String]) : Unit = {
     val conf = new SparkConf()
@@ -18,10 +18,10 @@ object TwitterDriver {
     val ssc = new StreamingContext(sc,Seconds(5))
     val owu = new OpenWeatherUtil
 
-    val consumerKey       = config.consumerKey
-    val consumerSecret    = config.consumerSecret
-    val accessToken       = config.accessToken
-    val accessTokenSecret = config.accessTokenSecret
+    val consumerKey       = consumerKey
+    val consumerSecret    = consumerSecret
+    val accessToken       = accessToken
+    val accessTokenSecret = accessTokenSecret
 
     val cb = new ConfigurationBuilder()
     cb.setDebugEnabled(true)

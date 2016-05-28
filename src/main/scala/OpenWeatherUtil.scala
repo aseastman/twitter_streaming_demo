@@ -6,13 +6,13 @@ import org.apache.http.impl.client.HttpClients
 /**
   * Created by a78084 on 5/27/16.
   */
-class OpenWeatherUtil {
+class OpenWeatherUtil extends config{
 
 
   def getWeather (location : String) = {
     val client = HttpClients.createDefault()
     val baseURL = "api.openweathermap.org/data/2.5/weather?q="
-    val url = baseURL + location + "&APPID=" + config.openWeatherKey
+    val url = baseURL + location + "&APPID=" + openWeatherKey
 
 //    val uri = new URIBuilder()
 //      .setScheme("http")
