@@ -25,7 +25,7 @@ class OpenWeatherUtil {
     val httpGet : HttpGet = new HttpGet(url)
 
     val response : CloseableHttpResponse = client.execute(httpGet)
-    val headers = response.getAllHeaders
+    val headers = response.getStatusLine.toString
     headers.foreach(println)
   }
 
