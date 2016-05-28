@@ -18,10 +18,10 @@ object TwitterDriver extends config {
     val ssc = new StreamingContext(sc,Seconds(5))
     val owu = new OpenWeatherUtil
 
-    val consumerKey       = consumerKey
-    val consumerSecret    = consumerSecret
-    val accessToken       = accessToken
-    val accessTokenSecret = accessTokenSecret
+    val consumerKey       : String = consumerKey
+    val consumerSecret    : String = consumerSecret
+    val accessToken       : String = accessToken
+    val accessTokenSecret : String = accessTokenSecret
 
     val cb = new ConfigurationBuilder()
     cb.setDebugEnabled(true)
