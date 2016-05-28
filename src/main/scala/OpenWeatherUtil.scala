@@ -6,25 +6,25 @@ import org.apache.http.impl.client.HttpClients
 /**
   * Created by a78084 on 5/27/16.
   */
-@transient class OpenWeatherUtil {
+class OpenWeatherUtil {
 
 
-  @transient def getWeather (location : String) = {
-    val client = HttpClients.createDefault()
+  def getWeather (location : String) = {
+    @transient val client = HttpClients.createDefault()
 //    val baseURL = "api.openweathermap.org/data/2.5/weather?q="
 //    val httpget = new HttpGet(baseURL + location)
 
-    val uri = new URIBuilder()
+    @transient val uri = new URIBuilder()
       .setScheme("http")
       .setHost("api.openweathermap.org")
       .setPath("/data/2.5/weather")
       .setParameter("q",location)
       .build()
 
-    val httpGet : HttpGet = new HttpGet(uri)
+    @transient val httpGet : HttpGet = new HttpGet(uri)
 
-    val response : CloseableHttpResponse = client.execute(httpGet)
-    val headers = response.getAllHeaders
+    @transient val response : CloseableHttpResponse = client.execute(httpGet)
+    @transient val headers = response.getAllHeaders
     headers.foreach(println)
   }
 
