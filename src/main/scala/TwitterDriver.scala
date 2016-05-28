@@ -63,8 +63,8 @@ object TwitterDriver {
             println(s"$username is $sentiment has tweeted '$text' ($textCount words) and has $friends friends.")
           }
         }
-        owu.getWeather("Denver")
       }
+      owu.getWeather("Denver")
     }
     ssc.start()
     ssc.awaitTermination()
