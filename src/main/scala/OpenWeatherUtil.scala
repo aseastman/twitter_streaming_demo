@@ -11,17 +11,17 @@ class OpenWeatherUtil {
 
   def getWeather (location : String) = {
     val client = HttpClients.createDefault()
-//    val baseURL = "api.openweathermap.org/data/2.5/weather?q="
-//    val httpget = new HttpGet(baseURL + location)
+    val baseURL = "api.openweathermap.org/data/2.5/weather?q="
+    val url = baseURL + location + "&APPID=" + config.openWeatherKey
 
-    val uri = new URIBuilder()
-      .setScheme("http")
-      .setHost("api.openweathermap.org")
-      .setPath("/data/2.5/weather")
-      .setParameter("q",location)
-      .build()
+//    val uri = new URIBuilder()
+//      .setScheme("http")
+//      .setHost("api.openweathermap.org")
+//      .setPath("/data/2.5/weather")
+//      .setParameter("q",location)
+//      .build()
 
-    val httpGet : HttpGet = new HttpGet(uri)
+    val httpGet : HttpGet = new HttpGet(url)
 
     val response : CloseableHttpResponse = client.execute(httpGet)
     val headers = response.getAllHeaders
