@@ -6,10 +6,10 @@ import org.apache.http.impl.client.HttpClients
 /**
   * Created by a78084 on 5/27/16.
   */
-class OpenWeatherUtil {
+@transient class OpenWeatherUtil {
 
 
-  def getWeather (location : String) = {
+  @transient def getWeather (location : String) = {
     @transient val client = HttpClients.createDefault()
 //    val baseURL = "api.openweathermap.org/data/2.5/weather?q="
 //    val httpget = new HttpGet(baseURL + location)
