@@ -6,7 +6,7 @@ import org.apache.http.impl.client.HttpClients
 /**
   * Created by a78084 on 5/27/16.
   */
-class OpenWeatherUtil {
+@transient class OpenWeatherUtil {
 
 
   def getWeather (location : String) = {
