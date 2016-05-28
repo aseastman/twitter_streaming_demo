@@ -15,7 +15,8 @@ object TwitterDriver {
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 
     val sc  = new SparkContext(conf)
-    val ssc = new StreamingContext(sc,Seconds(2))
+    val ssc = new StreamingContext(sc,Seconds(5))
+    val owu = new OpenWeatherUtil
 
     val consumerKey       = config.consumerKey
     val consumerSecret    = config.consumerSecret
@@ -62,6 +63,7 @@ object TwitterDriver {
             println(s"$username is $sentiment has tweeted '$text' ($textCount words) and has $friends friends.")
           }
         }
+        owu.getWeather("Denver")
       }
     }
     ssc.start()
