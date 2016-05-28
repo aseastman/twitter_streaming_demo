@@ -1,3 +1,5 @@
+import java.io.{BufferedReader, InputStreamReader, StringWriter}
+
 import org.apache.commons.httpclient.HttpClient
 import org.apache.http.client.methods.{CloseableHttpResponse, HttpGet}
 import org.apache.http.client.utils.URIBuilder
@@ -25,8 +27,9 @@ class OpenWeatherUtil {
     val httpGet : HttpGet = new HttpGet(url)
 
     val response : CloseableHttpResponse = client.execute(httpGet)
-    val headers = response.getStatusLine.toString
-    headers.foreach(println)
+    val entity = response.getEntity
+    val content = new BufferedReader(new InputStreamReader(entity.getContent))
+    println(content.readLine())
   }
 
 }
