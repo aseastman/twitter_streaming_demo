@@ -5,6 +5,7 @@ import org.apache.http.client.methods.{CloseableHttpResponse, HttpGet}
 import org.apache.http.client.utils.URIBuilder
 import org.apache.http.impl.client.{HttpClientBuilder, HttpClients}
 import play.api.libs.ws.ning.NingWSClient
+import play.api.libs.concurrent.Execution.Implicits._
 
 import scala.io.Source
 
