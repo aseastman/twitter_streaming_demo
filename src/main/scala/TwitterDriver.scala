@@ -37,23 +37,7 @@ object TwitterDriver {
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
 
-    //###############
-    val filters : Array[String] = Array("#Denver")
-
-    val client = new DefaultHttpClient() //Problem spot
-    val baseURL = "https://api.openweathermap.org/data/2.5/weather?q="
-    val url = baseURL + "Denver" + "&APPID=" + config.openWeatherKey
-
-
-
-    val httpGet : HttpGet = new HttpGet(url)
-
-    val response : CloseableHttpResponse = client.execute(httpGet)
-    val entity = response.getEntity
-    val content = entity.getContent
-    val text = Source.fromInputStream(content).getLines().mkString
-    content.close()
-    //#################
+    val filters : Array[String] = Array("Bin Wang","Stephane Bratu","Mark Warner","Deanna Abedin","Richard Rymer","Bratu","Abedin","M. Warner")
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
@@ -85,7 +69,7 @@ object TwitterDriver {
           }
         }
       }
-      println(owu.getWeather("Denver"))
+//      println(owu.getWeather("Denver"))
     }
     ssc.start()
     ssc.awaitTermination()
