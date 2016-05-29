@@ -8,6 +8,7 @@ val spark_version = "1.5.0"
 
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-ws" % "2.4.3",
+  "io.netty" % "netty" % "3.10.1.Final" force(),
   "org.apache.spark" %% "spark-core" % spark_version,
   "org.apache.spark" %% "spark-sql" % spark_version,
   "org.apache.spark" %% "spark-hive" % spark_version,
