@@ -1,4 +1,6 @@
 
+import org.apache.http.client.methods.{CloseableHttpResponse, HttpGet}
+import org.apache.http.impl.client.HttpClients
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.twitter._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -6,6 +8,8 @@ import org.apache.spark.{SparkConf, SparkContext}
 import twitter4j.auth.{Authorization, AuthorizationFactory}
 import twitter4j.conf.ConfigurationBuilder
 import twitter4j.Status
+
+import scala.io.Source
 
 
 object TwitterDriver {
@@ -32,7 +36,24 @@ object TwitterDriver {
 
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
+
+    //###############
     val filters : Array[String] = Array("#Denver")
+
+    val client = HttpClients.createDefault()
+    val baseURL = "https://api.openweathermap.org/data/2.5/weather?q="
+    val url = baseURL + "Denver" + "&APPID=" + config.openWeatherKey
+
+
+
+    val httpGet : HttpGet = new HttpGet(url)
+
+    val response : CloseableHttpResponse = client.execute(httpGet)
+    val entity = response.getEntity
+    val content = entity.getContent
+    val text = Source.fromInputStream(content).getLines().mkString
+    content.close()
+    //#################
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
