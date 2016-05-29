@@ -7,8 +7,8 @@ resolvers ++= Seq("mvnrepository" at "http://mvnrepository.com/artifact/",
 val spark_version = "1.5.0"
 
 libraryDependencies ++= Seq(
-  "org.apache.httpcomponents" % "httpclient" % "4.5.2",
-  "org.apache.httpcomponents" % "httpcore" % "4.4.4",
+  "org.apache.httpcomponents" % "httpclient" % "4.5.2" force(),
+  "org.apache.httpcomponents" % "httpcore" % "4.4.4" force(),
   "org.apache.spark" %% "spark-core" % spark_version,
   "org.apache.spark" %% "spark-sql" % spark_version,
   "org.apache.spark" %% "spark-hive" % spark_version exclude("org.apache.httpcomponents","httpclient"),
@@ -17,6 +17,10 @@ libraryDependencies ++= Seq(
   "edu.stanford.nlp" % "stanford-corenlp" % "3.6.0",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.6.0" classifier "models"
 )
+
+dependencyOverrides += "org.apache.httpcomponents" % "httpclient" % "4.5.2"
+dependencyOverrides += "org.apache.httpcomponents" % "httpcore" % "4.4.4"
+
 
 lazy val root = (project in file("."))
   .settings(
