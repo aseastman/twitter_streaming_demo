@@ -4,6 +4,7 @@ env HADOOP_CONF_DIR=/etc/hive/conf spark-submit --master yarn-cluster \
 --jars /home/a78084/.ivy2/cache/org.apache.spark/spark-streaming-twitter_2.10/jars/spark-streaming-twitter_2.10-1.5.0.jar,\
 /home/a78084/.ivy2/cache/edu.stanford.nlp/stanford-corenlp/jars/stanford-corenlp-3.6.0.jar,\
 /home/a78084/.ivy2/cache/edu.stanford.nlp/stanford-corenlp/jars/stanford-corenlp-3.6.0-models.jar,\
+/home/a78084/.ivy2/cache/com.typesafe.play/play-ws_2.10/jars/play-ws_2.10-2.4.3.jar,\
 /home/a78084/twitter_demo/twitter_streaming_demo/lib/httpclient-4.5.2.jar,\
 /home/a78084/twitter_demo/twitter_streaming_demo/lib/httpcore-4.4.4.jar,\
 /home/a78084/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.10.jar,\
