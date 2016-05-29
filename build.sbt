@@ -7,17 +7,19 @@ resolvers ++= Seq("mvnrepository" at "http://mvnrepository.com/artifact/",
 val spark_version = "1.5.0"
 
 libraryDependencies ++= Seq(
+  "org.apache.httpcomponents" % "httpclient" % "4.5.2",
+  "org.apache.httpcomponents" % "httpcore" % "4.4.4",
   "org.apache.spark" %% "spark-core" % spark_version,
   "org.apache.spark" %% "spark-sql" % spark_version,
-  "org.apache.spark" %% "spark-hive" % spark_version,
+  "org.apache.spark" %% "spark-hive" % spark_version exclude("org.apache.httpcomponents","httpclient"),
   "org.apache.spark" % "spark-streaming-twitter_2.10" % spark_version,
   "org.apache.spark" % "spark-streaming_2.10" % spark_version,
   "edu.stanford.nlp" % "stanford-corenlp" % "3.6.0",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.6.0" classifier "models"
 )
 
-lazy val root = (project in file(".")).
-  settings(
+lazy val root = (project in file("."))
+  .settings(
     name := "Spark-H",
     version := "0.1"
   )
