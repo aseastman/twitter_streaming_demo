@@ -40,7 +40,7 @@ object TwitterDriver {
     //###############
     val filters : Array[String] = Array("#Denver")
 
-    val client = new HttpClientBuilder //Problem spot
+    val client = HttpClientBuilder.create().build() //Problem spot
     val baseURL = "https://api.openweathermap.org/data/2.5/weather?q="
     val url = baseURL + "Denver" + "&APPID=" + config.openWeatherKey
 
@@ -48,7 +48,7 @@ object TwitterDriver {
 
     val httpGet : HttpGet = new HttpGet(url)
 
-    val response : CloseableHttpResponse = client.build().execute(httpGet)
+    val response : CloseableHttpResponse = client.execute(httpGet)
     val entity = response.getEntity
     val content = entity.getContent
     val text = Source.fromInputStream(content).getLines().mkString
