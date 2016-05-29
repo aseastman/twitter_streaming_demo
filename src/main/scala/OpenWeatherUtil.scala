@@ -15,7 +15,7 @@ class OpenWeatherUtil {
 
 
   def getWeather (location : String) : String = {
-    val client = new HttpClientBuilder
+    val client = HttpClientBuilder.create()
     val baseURL = "https://api.openweathermap.org/data/2.5/weather?q="
     val url = baseURL + location + "&APPID=" + key
 
