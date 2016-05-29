@@ -7,6 +7,7 @@ resolvers ++= Seq("mvnrepository" at "http://mvnrepository.com/artifact/",
 val spark_version = "1.5.0"
 
 libraryDependencies ++= Seq(
+  "com.typesafe.play" %% "play-ws" % "2.4.3",
   "org.apache.spark" %% "spark-core" % spark_version,
   "org.apache.spark" %% "spark-sql" % spark_version,
   "org.apache.spark" %% "spark-hive" % spark_version,
