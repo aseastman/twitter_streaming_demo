@@ -12,8 +12,6 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-hive" % spark_version,
   "org.apache.spark" % "spark-streaming-twitter_2.10" % spark_version,
   "org.apache.spark" % "spark-streaming_2.10" % spark_version,
-  "org.apache.httpcomponents" % "httpclient" % "4.5.2",
-  "org.apache.httpcomponents" % "httpcore" % "4.4.4",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.6.0",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.6.0" classifier "models"
 )

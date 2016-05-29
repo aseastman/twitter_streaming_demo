@@ -40,7 +40,7 @@ object TwitterDriver {
     //###############
     val filters : Array[String] = Array("#Denver")
 
-    val client = HttpClients.createDefault()
+    val client = HttpClients.createDefault() //Problem spot
     val baseURL = "https://api.openweathermap.org/data/2.5/weather?q="
     val url = baseURL + "Denver" + "&APPID=" + config.openWeatherKey
 
