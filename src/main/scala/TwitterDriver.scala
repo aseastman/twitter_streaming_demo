@@ -37,7 +37,7 @@ object TwitterDriver {
     val auth : Authorization = AuthorizationFactory.getInstance(cb.build())
 
 
-    val filters : Array[String] = Array("Bin Wang","Stephane Bratu","Mark Warner","Deanna Abedin","Richard Rymer","Bratu","Abedin","M. Warner")
+    val filters : Array[String] = Array("#fiveyearsout")
 
     val tweets : DStream[Status] = TwitterUtils.createStream(ssc, Option(auth),filters)
 
@@ -69,7 +69,7 @@ object TwitterDriver {
           }
         }
       }
-      println(owu.getWeather("Denver"))
+//      println(owu.getWeather("Denver"))
     }
     ssc.start()
     ssc.awaitTermination()
